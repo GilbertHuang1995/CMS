@@ -8,6 +8,7 @@ on:
   push:
     branches: 
       - master
+      - test1
   pull_request:
     branches: [ "main","master" ]
 
