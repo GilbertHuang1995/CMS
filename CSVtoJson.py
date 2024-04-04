@@ -16,13 +16,26 @@ def Genarate_Json(source):
         if str(Gateway) == 'nan' or Gateway==None or Gateway==np.nan:
             print('Gateway is empty')
             continue
+        print(f'Gateway is {Gateway}')
         tmp_source_IP = source[source.Gateway==Gateway]
         dict_result[f'{count}'] = {}
         dict_result[f'{count}']['IP'] = Gateway
         dict_result[f'{count}']['gwID'] = tmp_source_IP['UIG ID'].values[0]
         dict_result[f'{count}']['IT_Broker'] = {}
-        dict_result[f'{count}']['IT_Broker']['Host'] = str(tmp_source_IP['Broker'].values[0])+'/'+str(tmp_source_IP['port'].values[0])
-        dict_result[f'{count}']['IT_Broker']['Pass'] = str(tmp_source_IP['account'].values[0])+'/'+str(tmp_source_IP['password'].values[0])
+        if len(set(tmp_source_IP['Broker'].values))>1:
+            print(f"{Gateway} Broker conflict {set(tmp_source_IP['Broker'].values)}")
+            dict_result[f'{count}']['IT_Broker']['Host'] = np.nan
+            continue
+        else:
+            dict_result[f'{count}']['IT_Broker']['Host'] = str(tmp_source_IP['Broker'].values[0])+'/'+str(tmp_source_IP['port'].values[0])
+
+        if len(set(tmp_source_IP['password'].values))>1:
+            print(f"{Gateway} password conflict {set(tmp_source_IP['password'].values)}")
+            dict_result[f'{count}']['IT_Broker']['Pass'] = np.nan
+
+            continue
+        else:
+            dict_result[f'{count}']['IT_Broker']['Pass'] = str(tmp_source_IP['account'].values[0])+'/'+str(tmp_source_IP['password'].values[0])
         # dict_result[f'{count}']['gwID'] = source[source['IP']==Gateway]['UIG ID'].values[0]
         dict_result[f'{count}']['ports']={}
 
@@ -36,8 +49,21 @@ def Genarate_Json(source):
             dict_result[f'{count}']['ports'][f'{port_ID}'] = {}
             dict_result[f'{count}']['ports'][f'{port_ID}']['portID'] = port_ID
 
-            dict_result[f'{count}']['ports'][f'{port_ID}']['portName'] = tmp_source_Port_ID['Port Name'].values[0]
-            dict_result[f'{count}']['ports'][f'{port_ID}']['portType'] = tmp_source_Port_ID['Port Type'].values[0]
+            if len(set(tmp_source_Port_ID['Port Name'].values)) > 1:
+                print(f"{Gateway}  Port ID {port_ID}'s Port Name conflict {set(tmp_source_Port_ID['Port Name'].values)}")
+                dict_result[f'{count}']['ports'][f'{port_ID}']['portName'] =np.nan
+                continue
+            else:
+                dict_result[f'{count}']['ports'][f'{port_ID}']['portName'] = tmp_source_Port_ID['Port Name'].values[0]
+
+            if len(set(tmp_source_Port_ID['Port Type'].values)) > 1:
+                print(
+                    f"{Gateway}  Port ID {tmp_source_Port_ID}'s Port Type conflict {set(tmp_source_Port_ID['Port Type'].values)}")
+                dict_result[f'{count}']['ports'][f'{port_ID}']['portType'] = np.nan
+
+                continue
+            else:
+                dict_result[f'{count}']['ports'][f'{port_ID}']['portType'] = tmp_source_Port_ID['Port Type'].values[0]
             dict_result[f'{count}']['ports'][f'{port_ID}']['slaves'] = {}
 
             for slave in tmp_source_Port_ID['Slave ID'].values:
@@ -75,7 +101,7 @@ def get_key(key):
         return key
 def append_data(dict_org, dict_new):
     if dict_new['IP']==dict_org['IP'] and dict_new['IT_Broker']==dict_org['IT_Broker']:
-        print('Do APPEND')
+        print(f"Do APPEND on {dict_org['IP']}")
         for k_ports,v_ports in dict_new['ports'].items():
             if k_ports not in dict_org['ports'].keys():
                 # different port
@@ -85,7 +111,6 @@ def append_data(dict_org, dict_new):
                     dict_org['ports'][k_ports]['portType']==dict_new['ports'][k_ports]['portType']:
                 # Same port
                 for k_slave, v_slave in dict_new['ports'][k_ports]['slaves'].items():
-                    print()
                     if k_slave not in dict_org['ports'][k_ports]['slaves'].keys():
                         # different slave
                         dict_org['ports'][k_ports]['slaves'][k_slave] = v_slave
@@ -103,7 +128,7 @@ def append_data(dict_org, dict_new):
                         for k_channel, v_channel in dict_new['ports'][k_ports]['slaves'][k_slave]['channels'].items():
                             if v_channel['toolCH'] in l_toolCH_org:
                                 # Same toolCH
-                                print(f'Channel is already in original file at port {k_ports} slave {k_slave} Channel {k_channel} ')
+                                print(f"Channel is already in original file at port {k_ports} slave {k_slave} toolCH {v_channel['toolCH']}, SKIP")
                             else:
                                 max_chaneel = max([int(i) for i in list(dict_org['ports'][k_ports]['slaves'][k_slave]['channels'].keys())])+2 if len(dict_org['ports'][k_ports]['slaves'][k_slave]['channels'].keys())!=0 else 1
                                 for count_channel in range(max_chaneel):
@@ -118,14 +143,16 @@ def append_data(dict_org, dict_new):
                 dict_org['ports'][k_ports]['slaves'] = dict(sorted(dict_org['ports'][k_ports]['slaves'].items(),key=lambda item: int(item[0])))
 
             else:
-                print(f"portID ,portName or portType at port {k_ports} ")
+                print(f"\n{dict_new['IP']} get problem with portID ,portName or portType at port {k_ports}")
+                print(f"Original config -> portID = {dict_org['ports'][k_ports]['portID']} New is {dict_new['ports'][k_ports]['portID']}")
+                print(f"Original config -> portName = {dict_org['ports'][k_ports]['portName']} New is {dict_new['ports'][k_ports]['portName']}")
+                print(f"Original config -> portType = {dict_org['ports'][k_ports]['portType']} New is {dict_new['ports'][k_ports]['portType']}")
 
         dict_org['ports']= dict(sorted(dict_org['ports'].items(), key=lambda item: int(item[0])))
 
 
     else:
-        print(f"Org IP={dict_org['IP']}, IT_Broker={dict_org['IT_Broker']}, Pass={dict_org['Pass']}")
-        print(f"New IP={dict_new['IP']}, IT_Broker={dict_new['IT_Broker']}, Pass={dict_new['Pass']}")
+       print(f'Skip')
 
     return dict_org
 
@@ -133,12 +160,8 @@ if __name__ == '__main__':
 
     try:
         path_source = sys.argv[1]
-        IP_destination = sys.argv[2]
-        file_destination = rf'\\{IP_destination}\RPA_Shared\DaYou\CMS_config\config.json'
     except:
         path_source = fr'C:\Users\00074290\Desktop\DaYou\CMS\UIG_v1.xlsx'
-        IP_destination = '10.21.90.152'
-        file_destination = rf'\\{IP_destination}\RPA_Shared\DaYou\CMS_config\config.json'
 
 
     source = pd.read_excel(rf'{path_source}')
@@ -148,7 +171,12 @@ if __name__ == '__main__':
 
     for k, v in dict_result.items():
         IP_destination = v['IP']
-        file_destination = rf'\\{IP_destination}\RPA_Shared\DaYou\CMS_config\config.json'
+        file_path = rf'\\{IP_destination}\RPA_Shared\DaYou\CMS_config'
+        file_name = 'config.json'
+        file_destination = file_path +'\\'+file_name
+        if not os.path.exists(file_destination):
+            print(f'{file_path} does not existing')
+            continue
         if os.path.exists(file_destination):
             print(f'READING   {file_destination}  \n\n')
             # Do append
