@@ -6,8 +6,6 @@ import warnings
 import os
 warnings.filterwarnings('ignore')
 
-
-
 def Genarate_Json(source):
     print('Doing Genarate_Json')
     dict_result = {}
