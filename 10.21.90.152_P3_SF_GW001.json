@@ -1,0 +1,88 @@
+{
+    "IP": "10.21.90.152",
+    "gwID": "P3/SF/GW001",
+    "IT_Broker": {
+        "Host": "10.10.103.128/1883",
+        "Pass": "test_acc/test_passwd"
+    },
+    "ports": {
+        "13": {
+            "portID": 13,
+            "portName": "LAN1",
+            "portType": "ethernet",
+            "slaves": {
+                "8": {
+                    "slaveID": 8,
+                    "toolHost": "192.168.1.1",
+                    "toolProtocol": "modbustcp",
+                    "toolType": "tcp",
+                    "interval": 1,
+                    "channels": {
+                        "0": {
+                            "channelID": 0,
+                            "toolCH": 10
+                        },
+                        "1": {
+                            "channelID": 1,
+                            "toolCH": 10
+                        }
+                    }
+                },
+                "6": {
+                    "slaveID": 6,
+                    "toolHost": "192.168.1.1",
+                    "toolProtocol": "modbustcp",
+                    "toolType": "tcp",
+                    "interval": 1,
+                    "channels": {
+                        "0": {
+                            "channelID": 0,
+                            "toolCH": 10
+                        },
+                        "1": {
+                            "channelID": 1,
+                            "toolCH": 11
+                        },
+                        "2": {
+                            "channelID": 2,
+                            "toolCH": 222
+                        }
+                    }
+                }
+            }
+        },
+        "14": {
+            "portID": 14,
+            "portName": "LAN1",
+            "portType": "ethernet",
+            "slaves": {
+                "8": {
+                    "slaveID": 8,
+                    "toolHost": "192.168.1.1",
+                    "toolProtocol": "modbustcp",
+                    "toolType": "tcp",
+                    "interval": 1,
+                    "channels": {
+                        "0": {
+                            "channelID": 0,
+                            "toolCH": 10
+                        }
+                    }
+                },
+                "9": {
+                    "slaveID": 9,
+                    "toolHost": "192.168.1.1",
+                    "toolProtocol": "modbustcp",
+                    "toolType": "tcp",
+                    "interval": 1,
+                    "channels": {
+                        "0": {
+                            "channelID": 0,
+                            "toolCH": 10
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

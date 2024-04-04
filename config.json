@@ -1,0 +1,168 @@
+{
+    "IP": "10.21.90.152",
+    "gwID": "P3/SF/GW001",
+    "IT_Broker": {
+        "Host": "10.10.103.128/1883",
+        "Pass": "test_acc/test_passwd"
+    },
+    "ports": {
+        "13": {
+            "portID": 13,
+            "portName": "LAN1",
+            "portType": "ethernet",
+            "slaves": {
+                "8": {
+                    "slaveID": 8,
+                    "toolHost": "192.168.1.1",
+                    "toolProtocol": "modbustcp",
+                    "toolType": "tcp",
+                    "interval": 1,
+                    "channels": {
+                        "0": {
+                            "channelID": 0,
+                            "toolCH": 10
+                        },
+                        "1": {
+                            "channelID": 1,
+                            "toolCH": 20
+                        }
+                    }
+                },
+                "6": {
+                    "slaveID": 6,
+                    "toolHost": "192.168.1.1",
+                    "toolProtocol": "modbustcp",
+                    "toolType": "tcp",
+                    "interval": 1,
+                    "channels": {
+                        "0": {
+                            "channelID": 0,
+                            "toolCH": 10
+                        },
+                        "1": {
+                            "channelID": 1,
+                            "toolCH": 333
+                        },
+                        "2": {
+                            "channelID": 2,
+                            "toolCH": 222
+                        }
+                    }
+                }
+            }
+        },
+        "14": {
+            "portID": 14,
+            "portName": "LAN1",
+            "portType": "ethernet",
+            "slaves": {
+                "8": {
+                    "slaveID": 8,
+                    "toolHost": "192.168.1.1",
+                    "toolProtocol": "modbustcp",
+                    "toolType": "tcp",
+                    "interval": 1,
+                    "channels": {
+                        "0": {
+                            "channelID": 0,
+                            "toolCH": 10
+                        }
+                    }
+                },
+                "9": {
+                    "slaveID": 9,
+                    "toolHost": "192.168.1.1",
+                    "toolProtocol": "modbustcp",
+                    "toolType": "tcp",
+                    "interval": 1,
+                    "channels": {
+                        "0": {
+                            "channelID": 0,
+                            "toolCH": 11
+                        }
+                    }
+                }
+            }
+        },
+        "15": {
+            "portID": 15,
+            "portName": "LAN3",
+            "portType": "ethernet",
+            "slaves": {
+                "10": {
+                    "slaveID": 10,
+                    "toolHost": "192.168.1.3",
+                    "toolProtocol": "modbustcp",
+                    "toolType": "tcp",
+                    "interval": 3,
+                    "channels": {
+                        "0": {
+                            "channelID": 0,
+                            "toolCH": 12
+                        }
+                    }
+                }
+            }
+        },
+        "16": {
+            "portID": 16,
+            "portName": "LAN4",
+            "portType": "ethernet",
+            "slaves": {
+                "11": {
+                    "slaveID": 11,
+                    "toolHost": "192.168.1.4",
+                    "toolProtocol": "modbustcp",
+                    "toolType": "tcp",
+                    "interval": 4,
+                    "channels": {
+                        "0": {
+                            "channelID": 0,
+                            "toolCH": 13
+                        }
+                    }
+                }
+            }
+        },
+        "17": {
+            "portID": 17,
+            "portName": "LAN5",
+            "portType": "ethernet",
+            "slaves": {
+                "12": {
+                    "slaveID": 12,
+                    "toolHost": "192.168.1.5",
+                    "toolProtocol": "modbustcp",
+                    "toolType": "tcp",
+                    "interval": 5,
+                    "channels": {
+                        "0": {
+                            "channelID": 0,
+                            "toolCH": 14
+                        }
+                    }
+                }
+            }
+        },
+        "18": {
+            "portID": 18,
+            "portName": "LAN6",
+            "portType": "ethernet",
+            "slaves": {
+                "13": {
+                    "slaveID": 13,
+                    "toolHost": "192.168.1.6",
+                    "toolProtocol": "modbustcp",
+                    "toolType": "tcp",
+                    "interval": 6,
+                    "channels": {
+                        "0": {
+                            "channelID": 0,
+                            "toolCH": 15
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

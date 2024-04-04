@@ -1,0 +1,50 @@
+{
+    "IP": "10.11.15.255",
+    "gwID": "P3/SF/GW001",
+    "IT_Broker": {
+        "Host": "10.10.103.128/1883",
+        "Pass": "test_acc/test_passwd"
+    },
+    "ports": {
+        "15": {
+            "portID": 15,
+            "portName": "LAN1",
+            "portType": "ethernet",
+            "slaves": {
+                "6": {
+                    "slaveID": 6,
+                    "toolHost": "192.168.1.1",
+                    "toolProtocol": "modbustcp",
+                    "toolType": "tcp",
+                    "interval": 1,
+                    "channels": {
+                        "0": {
+                            "channelID": 0,
+                            "toolCH": 5
+                        }
+                    }
+                }
+            }
+        },
+        "16": {
+            "portID": 16,
+            "portName": "LAN2",
+            "portType": "ethernet",
+            "slaves": {
+                "4": {
+                    "slaveID": 4,
+                    "toolHost": "192.168.1.2",
+                    "toolProtocol": "modbustcp",
+                    "toolType": "tcp",
+                    "interval": 1,
+                    "channels": {
+                        "0": {
+                            "channelID": 0,
+                            "toolCH": 6
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "IP": "10.11.15.258",
+    "gwID": "P3/SF/GW005",
+    "IT_Broker": {
+        "Host": "10.10.103.132/1887",
+        "Pass": "test_acc/test_passwd"
+    },
+    "ports": {
+        "19": {
+            "portID": 19,
+            "portName": "LAN5",
+            "portType": "ethernet",
+            "slaves": {
+                "7": {
+                    "slaveID": 7,
+                    "toolHost": "192.168.1.5",
+                    "toolProtocol": "modbustcp",
+                    "toolType": "tcp",
+                    "interval": 1,
+                    "channels": {
+                        "0": {
+                            "channelID": 0,
+                            "toolCH": 9
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
