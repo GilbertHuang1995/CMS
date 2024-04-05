@@ -164,7 +164,6 @@ if __name__ == '__main__':
     except:
         path_source = fr'C:\Users\00074290\Desktop\DaYou\CMS\UIG_v1.xlsx'
 
-
     source = pd.read_excel(rf'{path_source}')
     source.rename(columns=source.iloc[1], inplace=True)
     source = source[2:]

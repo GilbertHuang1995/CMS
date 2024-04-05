@@ -39,3 +39,6 @@ jobs:
     - name: Test with pytest
       run: |
         echo "TEST HAHA"
+    - name: run CSVtoJson
+      run: |
+        python .\CSVtoJson.py  
