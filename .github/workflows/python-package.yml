@@ -42,4 +42,4 @@ jobs:
         echo "TEST HAHA"
     - name: run CSVtoJson
       run: |
-        python .\CSVtoJson.py  
+        python CSVtoJson.py  
