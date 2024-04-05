@@ -16,12 +16,11 @@ jobs:
 
 
   job0:
-    build:
-      runs-on: ubuntu-latest
-      strategy:
-        fail-fast: false
-        matrix:
-          python-version: [ "3.11" ]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ "3.11" ]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -47,12 +46,11 @@ jobs:
         python CSVtoJson.py UIG_v1.xlsx
 
   job1:
-    build:
-      runs-on: ubuntu-latest
-      strategy:
-        fail-fast: false
-        matrix:
-          python-version: [ "3.11" ]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ "3.11" ]
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -62,4 +60,4 @@ jobs:
 
       - name: Test with pytest
         run: |
-          echo "TEST HAHA"
+          echo "TEST HAHA job1"
